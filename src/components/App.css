@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Spartan;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+.wrapper{
+    margin: 3% auto;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-title{
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 107.5px;
+    text-align: center;
+    margin: 15% 0 48px 0;
+}
+
+.subtitle{
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 45.44px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.figuresContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;   
+}
+.figureCard{
+    background-color: #F1F0FF;
+    border-radius: 45px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 30%;
+    max-width: 700px;
+    height: 713px;
+    margin: 20px;
+    cursor: pointer;
+}
+.figureCard img{
+    width: 90%;
+    max-width: 400px;
+    height: 394px;
+}
+.figureCard h2{
+    font-size: 32px;
+    font-weight: 700;
+}
+.figureCard p{
+    font-size: 18px;
+    text-align: center;
+}
+.buyFigure{
+    text-decoration: none;
+    background-color: black;
+    border-radius: 50px;
+    padding: 22px 32px;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+}
+.productCard{
+    width: 90%;
+    margin-top: 30px;
+}
+.buy-block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F1F0FF;
+    border-radius: 45px;
+    padding: 30px;
+}
+.picture{
+    width: 40%;
+}
+.buy-block img{
+    width: 100%;
+    max-width: 600px;
+    height: 600px;
+}
+.description-block{
+    width: 60%;
+}
+.description-block h1{
+    font-size: 78px;
+    font-weight: 900;
+}
+.description-block p{
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px 0 50px 0;
+}
+.description-block form{
+    position: relative;
+}
+.description-block input{
+    border-radius: 48px;
+    border: 2px solid rgba(214, 216, 231, 1);
+    width: 100%;
+    padding: 30px;
+    color: rgba(35, 35, 41, 1);
+    font-size: 20px;
+    font-weight: 500;
+}
+.description-block button{
+    position: absolute;
+    top: .3em;
+    right: .5em;
+    text-decoration: none;
+    background-color: black;
+    border-radius: 50px;
+    padding: 22px 32px;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+}
+.productCard h2{
+    font-size: 40px;
+    font-weight: bold;
+    margin: 50px 0 10px 0;
+}
+
+@media(max-width: 1500px) {
+    .figureCard{
+        padding: 10px;
+        width: 30%;
+        height: 600px;
+        max-width: 700px;
+        margin: 10px;
+    }
+    .figureCard img{
+        height: 300px;
+    }
+    .figureCard h2{
+        font-size: 24px;
+    }
+    .figureCard p{
+        font-size: 16px;
+    }
+    .buyFigure{
+        padding: 22px 32px;
+        font-size: 18px;
+    }
+
+
+
+    .buy-block img{
+        height: 400px;
+    }
+    .description-block h1{
+        font-size: 50px;
+    }
+    .description-block p{
+        font-size: 22px;
+    }
+    .description-block button{
+        top: .8em;
+        right: .5em;
+        font-size: 16px;
+        padding: 22px 22px;
+    }
+}
+@media(max-width: 980px) {
+    .main-title{
+        font-size: 80px;
+        line-height: 90px;
+    }
+    .subtitle{
+        font-size: 28px;
+    }
+    .figureCard{
+        width: 45%;
+    }
+    .figureCard p{
+        font-size: 17px;
+    }
+    .figureCard img{
+        width: 80%;
+    }
+
+
+
+    .buy-block img{
+        height: 300px;
+    }
+    .description-block h1{
+        font-size: 35px;
+    }
+    .description-block p{
+        font-size: 18px;
+    }
+    .description-block input{
+        padding: 20px;
+        font-size: 14px;
+    }
+    .description-block button{
+        top: .5em;
+        right: .5em;
+        font-size: 14px;
+        padding: 15px 10px;
+    }
+    .productCard h2{
+        font-size: 30px;
+    }
+}
+@media(max-width: 768px) {
+    .main-title{
+        font-size: 45px;
+        line-height: 70px;
+    }
+    .subtitle{
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .figureCard{
+        width: 45%;
+        height: 500px;
+    }
+    .figureCard h2{
+        font-size: 18px;
+        text-align: center;
+    }
+    .figureCard p{
+        font-size: 14px;
+    }
+    .figureCard img{
+        width: 90%;
+        height: 200px;
+    }
+    .buyFigure{
+        font-size: 12px;
+    }
+
+
+
+    .buy-block{
+        flex-direction: column;
+    }
+    .picture {
+        width: 100%;
+    }
+    .buy-block img{
+        height: 450px;
+    }
+    .description-block{
+        width: 90%;
+    }
+    .description-block h1{
+        font-size: 30px;
+        text-align: center;
+    }
+    .description-block p{
+        font-size: 16px;
+        text-align: center;
+    }
+    .description-block input{
+        padding: 19px;
+        font-size: 14px;
+    }
+    .description-block button{
+        top: .7em;
+        right: .5em;
+        font-size: 12px;
+    }
+    .productCard h2{
+        font-size: 24px;
+    }
+}
+@media(max-width: 500px) {
+    .main-title{
+        font-size: 40px;
+        line-height: 50px;
+    }
+    .subtitle{
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .figureCard{
+        width: 80%;
+        height: 450px;
+    }
+
+
+
+    .picture {
+        width: 80%;
+    }
+    .buy-block{
+        padding: 5px;
+    }
+    .buy-block img{
+        height: 250px;
+    }
+    .description-block{
+        width: 90%;
+    }
+    .description-block input{
+        padding: 18px;
+        font-size: 10px;
+    }
+    .description-block button{
+        top: .7em;
+        right: .5em;
+        font-size: 10px;
+    }
+    .productCard h2{
+        font-size: 24px;
+        text-align: center;
+    }
+}
