@@ -10,7 +10,7 @@ const Figure = (props) => {
     const prettyPrice = splitPrice.join('');
 
     return (
-        <div className='figureCard'>
+        <div className='figureCard' data-testid='figure'>
             <img src={`${baseUrlImage}${image}`} />
             <h2>{name}</h2>
             <p>{shortDescription}</p>

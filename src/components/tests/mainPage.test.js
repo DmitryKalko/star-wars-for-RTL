@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { render, act } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
+import { render, cleanup, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect'; 
 import MainPage from '../MainPage';
+import { MemoryRouter } from "react-router-dom";
 
 jest.mock("axios");  //  замокали либу аксиос
 
@@ -30,16 +31,42 @@ const goods = [
     },
 ];
 
+const meta = {
+    totalPages: 2
+}
+
+const mockServerRequest = async () =>{
+    axios.get.mockReturnValue({data: {data: [...goods], meta: {...meta}}}); 
+}
+
+const renderComponentWithAllMocks = () => {
+    mockServerRequest();
+    render(
+        <MemoryRouter>
+            <MainPage />
+        </MemoryRouter>
+        );
+}
 
 describe('MainPage', () => {
-    it("fetch new data", async () => {
-        axios.get.mockImplementationOnce(() => Promise.resolve({data: {goods}}));
-        // const { getByTestId } = render(<MainPage/>);
-        // const items = await getByTestId('FiguresList');
-        // expect(items).toHaveLength(3)
+    afterEach(cleanup);
+    it("should fetch new data and render child components", async () => {
+        renderComponentWithAllMocks();
 
+            // FIND // ASYNC
 
+            // GET // fail test 
+
+            // QUERY // return null 
+
+        const items = await screen.findAllByTestId(/figure/i);
+
+        expect(items).toHaveLength(3);        
+    });
+
+    it('should fetch data from defined url', () =>{ 
+        renderComponentWithAllMocks();
         expect(axios.get).toBeCalledTimes(1);
-        expect(axios.get).toBeCalledWith("https://react-test-starwars.vercel.app/api/products");
+        expect(axios.get).toBeCalledWith("https://react-test-starwars.vercel.app/api/products?page=1");
     })
 });
