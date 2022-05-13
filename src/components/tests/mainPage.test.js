@@ -7,7 +7,7 @@ import { MemoryRouter } from "react-router-dom";
 
 jest.mock("axios");  //  замокали либу аксиос
 
-const goods = [
+const goods = [    // замокали данные
     {
         "id": 1,
         "shortDescription": "Veteran of the Galactic Civil War who fought under the banner of the Rebellion.",
@@ -31,7 +31,7 @@ const goods = [
     },
 ];
 
-const meta = {
+const meta = {   // замокали данные
     totalPages: 2
 }
 
@@ -49,15 +49,15 @@ const renderComponentWithAllMocks = () => {
 }
 
 describe('MainPage', () => {
-    afterEach(cleanup);
+    afterEach(cleanup);  // очищаем предыдущие моки что бы не было никаких накладок 
     it("should fetch new data and render child components", async () => {
         renderComponentWithAllMocks();
 
-            // FIND // ASYNC
+            // FIND // используется когда элемента еще нет на странице но он там ожидается (подгружается асинхронно или появится при клике)
 
-            // GET // fail test 
+            // GET // используется когда нужно найти статический элемент (он точно есть на странице)
 
-            // QUERY // return null 
+            // QUERY // используется когда нужно убедиться что такого элемента нет на странице (возвращает null если нет совпадений)
 
         const items = await screen.findAllByTestId(/figure/i);
 
