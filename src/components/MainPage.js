@@ -12,16 +12,18 @@ const MainPage = () => {
     const [fetching, setFetching] = useState(true);
     const [totalPages, setTotalPages] = useState(1);
 
+    const fetchData = async () =>{
+        let newCurrentPage = currentPage + 1;
+        setCurrentPage(newCurrentPage); 
+        const response = await axios.get(`${baseUrl}?page=${newCurrentPage}`);
+        setFiguresData([...figuresData, ...response.data.data])
+        setTotalPages(response.data.meta.totalPages);
+        setFetching(false);
+    }
+
     useEffect(() => {
         if (fetching && currentPage < totalPages) {
-            let newCurrentPage = currentPage + 1;
-            setCurrentPage(newCurrentPage); 
-            axios.get(`${baseUrl}?page=${newCurrentPage}`)
-                .then((response) => {
-                    setFiguresData([...figuresData, ...response.data.data])
-                    setTotalPages(response.data.meta.totalPages)
-                })
-                .finally(() => setFetching(false))
+            fetchData();
         }
     }, [fetching]);
 
