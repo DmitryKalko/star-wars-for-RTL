@@ -1,10 +1,26 @@
 import React from 'react';
 import axios from 'axios';
-import { render, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'
 import { userEvent } from '@testing-library/user-event';
 import MainPage from '../MainPage';
 
-jest.mock("axios");  //  замокали либу аксиос
+// ОПИСАНИЕ
+// ОТЛИЧИЯ RTL ОТ ENZYME
+// - React Testing Library работает напрямую с реальными ДОМ узлами, а Enzyme работает с экземплярами отрендоренных компонентов
+// - RTL не опирается на классы, айди или теги элементов, а опираентся на их содержание (эмитирует поведение пользователя)
+// - снимки можно делать но по сути они не нужны поскольку мы не опираемся на внутреннюю реализацию компонента (т е при render мы увидим тоже самое что и при снапшоте)
+// - используются регулярки для написания более гибких тестов (что бы не проверять точное совпадения по тексту)
+
+
+
+
+
+// чем отличается fireEvent от userEvents?
+
+
+
+//jest.mock("axios");  //  замокали либу аксиос
 
 const goods = [
     {
@@ -32,14 +48,28 @@ const goods = [
 
 
 describe('MainPage', () => {
-    it("fetch new data", async () => {
-        axios.get.mockImplementationOnce(() => Promise.resolve({data: {goods}}));
-        // const { getByTestId } = render(<MainPage/>);
-        // const items = await getByTestId('FiguresList');
-        // expect(items).toHaveLength(3)
+
+    it("should have title", () => {
+       const { getByText } = render(<MainPage/>);   // getByText и другие, это методы объекта screen
+       const titleElement = getByText(/Star Wars/i);
+       expect(titleElement).toBeInTheDocument();
+
+    //    render(<MainPage/>);
+    //    screen.debug()  // покажет разметку страницы как ее увидит пользователь
+
+    // const { asFragment } = render(<MainPage/>);
+    // expect(asFragment(<MainPage/>)).toMatchSnapshot()
+    });
 
 
-        expect(axios.get).toBeCalledTimes(1);
-        expect(axios.get).toBeCalledWith("https://react-test-starwars.vercel.app/api/products");
-    })
+    // it("fetch new data", async () => {
+    //     axios.get.mockImplementationOnce(() => Promise.resolve({data: {goods}}));
+    //     // const { getByTestId } = render(<MainPage/>);
+    //     // const items = await getByTestId('FiguresList');
+    //     // expect(items).toHaveLength(3)
+
+
+    //     expect(axios.get).toBeCalledTimes(1);
+    //     expect(axios.get).toBeCalledWith("https://react-test-starwars.vercel.app/api/products");
+    // })
 });

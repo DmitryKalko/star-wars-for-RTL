@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPage should have title 1`] = `
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <h1
+      class="main-title"
+    >
+      Star Wars 
+      <br />
+       Figures
+    </h1>
+    <p
+      class="subtitle"
+    >
+      Find the latest products for the biggest fans 
+      <br />
+       of the iconic saga.
+    </p>
+    <div
+      class="figuresContainer"
+    />
+  </div>
+</DocumentFragment>
+`;

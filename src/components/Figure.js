@@ -26,4 +26,5 @@ const Figure = (props) => {
     )
 }
 
+
 export default Figure;
