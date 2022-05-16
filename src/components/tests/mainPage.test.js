@@ -48,6 +48,7 @@ const renderComponentWithAllMocks = () => {
         );
 }
 
+
 describe('MainPage', () => {
     afterEach(cleanup);  // очищаем предыдущие моки что бы не было никаких накладок 
     it("should fetch new data and render child components", async () => {
@@ -65,8 +66,28 @@ describe('MainPage', () => {
     });
 
     it('should fetch data from defined url', () =>{ 
-        renderComponentWithAllMocks();
+        renderComponentWithAllMocks(); 
         expect(axios.get).toBeCalledTimes(1);
         expect(axios.get).toBeCalledWith("https://react-test-starwars.vercel.app/api/products?page=1");
     })
+
+
+    it("should render title", () => {
+        const { getByText } = render(<MainPage />);
+        const title = getByText(' Star Wars Figures');
+        expect(title).toBeInTheDocument();
+    });
+
+    // it('should render input', () =>{ 
+    //     renderComponentWithAllMocks();
+    //     const placeholder = screen.getByPlaceholderText('Email');
+    //     expect(placeholder).toBeInTheDocument(); 
+    // })
 });
+
+
+// fireevent - машинное поведение, если мы берем клик то будет эмитироваться только click
+// userevent - полная имитация поведения пользователя (если мы берем клик то будет эмитироваться mousedown, click, mouseup)
+
+
+// !!! если мы работаем например с react router и не мокам его никак а реально проверяем переходы по роутам - это уже интеграционные тесты
