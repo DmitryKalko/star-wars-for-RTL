@@ -74,7 +74,7 @@ describe('MainPage', () => {
 
     it("should render title", () => {
         const { getByText } = render(<MainPage />);
-        const title = getByText(' Star Wars Figures');
+        const title = getByText(/Star Wars/i);
         expect(title).toBeInTheDocument();
     });
 
