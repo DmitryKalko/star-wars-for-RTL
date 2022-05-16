@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { render, cleanup, screen } from '@testing-library/react';
+import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'; 
+import { MemoryRouter, Router } from "react-router-dom";
+import { createMemoryHistory } from 'history';
 import MainPage from '../MainPage';
-import { MemoryRouter } from "react-router-dom";
 
 jest.mock("axios");  //  замокали либу аксиос
 
@@ -35,7 +36,7 @@ const meta = {   // замокали данные
     totalPages: 2
 }
 
-const mockServerRequest = async () =>{
+const mockServerRequest = async () =>{   // мокаем ответ от сервера
     axios.get.mockReturnValue({data: {data: [...goods], meta: {...meta}}}); 
 }
 
@@ -78,6 +79,8 @@ describe('MainPage', () => {
         expect(title).toBeInTheDocument();
     });
 
+    // как добраться до другого роута?
+    
     // it('should render input', () =>{ 
     //     renderComponentWithAllMocks();
     //     const placeholder = screen.getByPlaceholderText('Email');
@@ -86,8 +89,51 @@ describe('MainPage', () => {
 });
 
 
+describe("roiting testing", () => {
+    it("check route to Cara Dune", () => {
+        renderComponentWithAllMocks(); 
+        const history = createMemoryHistory();
+        const { container, getByText } = render(
+            <Router history={history}>
+                <RouterComponent />
+            </Router>
+        );
+
+        fireEvent.click(getByText(/Buy/i));   // там используется компонент Link из react-router-dom . как эмитировать клик по нему?
+        expect(container.innerHTML).toMatch('Cara Dune')
+    })
+})
+
+
+
+
+// СПОСОБЫ ПОИСКА ЭЛЕМЕНТОВ
+// - FIND - используется когда элемента еще нет на странице но он там ожидается (подгружается асинхронно или появится при клике)
+// - GET - используется когда нужно найти статический элемент (он точно есть на странице)
+// - QUERY - используется когда нужно убедиться что такого элемента нет на странице (возвращает null если нет совпадений)
+
+
+// чем отличается fireEvent от userEvents?
 // fireevent - машинное поведение, если мы берем клик то будет эмитироваться только click
 // userevent - полная имитация поведения пользователя (если мы берем клик то будет эмитироваться mousedown, click, mouseup)
 
 
 // !!! если мы работаем например с react router и не мокам его никак а реально проверяем переходы по роутам - это уже интеграционные тесты
+
+
+// ОПИСАНИЕ
+// ОТЛИЧИЯ RTL ОТ ENZYME
+// - React Testing Library работает напрямую с реальными ДОМ узлами, а Enzyme работает с экземплярами отрендоренных компонентов
+// - RTL не опирается на классы, айди или теги элементов, а опираентся на их содержание (эмитирует поведение пользователя)
+// - снимки можно делать но по сути они не нужны поскольку мы не опираемся на внутреннюю реализацию компонента (т е при render мы увидим тоже самое что и при снапшоте)
+// - используются регулярки для написания более гибких тестов (что бы не проверять точное совпадения по тексту)
+
+
+
+// const { getByText } = render(<MainPage/>);   // getByText и другие, это методы объекта screen
+
+// render(<MainPage/>);
+// screen.debug()  // покажет разметку страницы как ее увидит пользователь
+
+// const { asFragment } = render(<MainPage/>);
+// expect(asFragment(<MainPage/>)).toMatchSnapshot()   // сделает снимок
